@@ -24,7 +24,7 @@ pipeline {
             steps {
             	script {
         			try {
-        				bat ("mvn test -Dcucumber.features='src/test/resources/features/' -Dcucumber.filter.tags=\'${ESCENARIO}\' -Dcucumber.plugin=json:target/site/result.json -Dcucumber.glue='demo'")
+        				bat ("mvn test -Dcucumber.features='src/test/resources/features/' -Dcucumber.filter.tags=\'${ESCENARIO}\' -Dcucumber.plugin=json:target/site/result.json -Dcucumber.glue=demo")
 				                        	
         			}
         			catch (ex) {
