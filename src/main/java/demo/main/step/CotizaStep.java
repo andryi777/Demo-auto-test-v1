@@ -11,7 +11,7 @@ public class CotizaStep {
 	private AppCarroAplica appCarroAplica;
 	
 	public void ingresarPakta() {
-		appHomePage.inicializar("https://d1x6s3ign30iot.cloudfront.net/");
+		appHomePage.inicializar("https://urbania.pe/buscar/venta-de-casas-en-lima?page=2");
 	}
 	
 	public void ingresoValores(String placa, String dni, String celular, String correo) {
