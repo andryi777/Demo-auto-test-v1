@@ -23,10 +23,10 @@ public class AppUrbaniaHomePage extends PageObject {
 	}
 
 	public void inicializar(String url) {
-		getDriver().navigate().to(url);
-		getDriver().manage().deleteAllCookies();
-		getDriver().manage().window().maximize();
-		getDriver().manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
+		RemoteDriver.of(getDriver()).navigate().to(url);
+		RemoteDriver.of(getDriver()).manage().deleteAllCookies();
+		RemoteDriver.of(getDriver()).manage().window().maximize();
+		RemoteDriver.of(getDriver()).manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		
 	}
 	
