@@ -4,6 +4,9 @@ import org.junit.runner.RunWith;
 
 import demo.test.util.ExcelUtilPropio;
 import io.cucumber.junit.CucumberOptions;
+import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
+import net.thucydides.core.environment.SystemEnvironmentVariables;
+import net.thucydides.core.util.EnvironmentVariables;
 
 @RunWith(RunPersonalizar.class)
 
@@ -16,5 +19,13 @@ public class RunDemo {
 	@RunBefore
 	public static void previo() {
 //		ExcelUtilPropio.getInstancia().escribirFeatures();
+		System.out.println("ss");
+				
+		EnvironmentVariables variables= SystemEnvironmentVariables.createEnvironmentVariables(); 
+
+		String v_user= EnvironmentSpecificConfiguration.from(variables).getProperty("saucelabs.userName"); 
+		String v_pass= EnvironmentSpecificConfiguration.from(variables).getProperty("saucelabs.accessKey"); 
+
+		System.out.println(v_user+ " - "+v_pass); 
 	}
 }
