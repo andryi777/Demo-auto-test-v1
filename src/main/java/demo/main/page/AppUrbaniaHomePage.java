@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import demo.main.util.PageObjectUtil;
 import demo.main.xpath.XpathUrbaniaHome;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.PageObject;
 
 public class AppUrbaniaHomePage extends PageObject {
@@ -36,6 +37,8 @@ public class AppUrbaniaHomePage extends PageObject {
 		pageObjectUtil.seleniumEscribir(getDriver(), xpathUrbaniaHome.txtDatosCasa, 0, "Lima", null);
 		pageObjectUtil.seleniumClick(getDriver(), xpathUrbaniaHome.opcLima, 0);
 		pageObjectUtil.seleniumClick(getDriver(), xpathUrbaniaHome.btnBuscar, 0);
+		
+		Serenity.takeScreenshot();
 	}
 	
 }

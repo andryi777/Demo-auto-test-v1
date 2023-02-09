@@ -1,3 +1,20 @@
+import java.text.SimpleDateFormat
+
+def defDateFormat = new SimpleDateFormat("yyyyMMddHHmm")
+def defDate = new Date()
+def defTimestamp = defDateFormat.format(defDate).toString()
+
+def secrets = [
+  [path: 'AutoRimac/Demo-auto-def-test', engineVersion: 2, secretValues: [
+	    [envVar: 'v_SaucelabsUser', vaultKey: 'v_SaucelabsUser'],
+	    [envVar: 'v_SaucelabsAccessKey', vaultKey: 'v_SaucelabsAccessKey']
+ 	]
+  ]
+]
+
+def configuration = [vaultUrl: 'http://localhost:8200',  vaultCredentialId: 'VaultCredential', engineVersion: 2]
+
+
 pipeline {
 
     agent any
@@ -22,15 +39,20 @@ pipeline {
         
 		stage("Ejecutar Pruebas") {
             steps {
-            	script {
-        			try {
-        				bat ("mvn test -Dcucumber.features=src/test/resources/features/ -Dcucumber.filter.tags=${ESCENARIO} -Dcucumber.plugin=json:target/site/result.json -Dcucumber.glue=demo")
-				                        	
-        			}
-        			catch (ex) {
-        				echo 'Finalizo ejecucion con fallos...'
-        				error ('Failed')
-                    }
+            	withVault([configuration: configuration, vaultSecrets: secrets]) {
+        			script {
+	        			try {
+	        				sauce('saucelabs-US') {
+	    						sauceconnect(useGeneratedTunnelIdentifier: true, verboseLogging: true) {
+			        				bat ("mvn test -Dcucumber.features=src/test/resources/features/ -Dcucumber.filter.tags=${ESCENARIO} -Dcucumber.plugin=json:target/site/result.json -Dcucumber.glue=demo")
+			        			}
+			        		}
+	        			}
+	        			catch (ex) {
+	        				echo 'Finalizo ejecucion con fallos...'
+	        				error ('Failed')
+	                    }
+					}
                 }
             }
         }
@@ -43,6 +65,7 @@ pipeline {
                     	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/target/site/serenity", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])
                     	//publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: "${WORKSPACE}/target/site/serenity${defTimestamp}", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: ''])
                     	//publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: "${WORKSPACE}\\target\\site\\serenity${defTimestamp}", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: ''])
+                        saucePublisher()
                         echo 'Reporte realizado con exito'
                     }
 
