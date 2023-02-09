@@ -47,7 +47,7 @@ public class AppUrbaniaResultadosPage extends PageObject {
 		
 		Serenity.takeScreenshot();
 //		TestOutcome outcome = StepEventBus.getEventBus().getBaseStepListener().getCurrentTestOutcome();
-		System.out.println("SauceOnDemandSessionID="+RemoteDriver.of(getDriver()).getSessionId().toString()+ " job-name=TEST");
+//		System.out.println("SauceOnDemandSessionID="+RemoteDriver.of(getDriver()).getSessionId().toString()+ " job-name=TEST");
 		
 //		while(getDriver().findElement(By.xpath(xpathUrbaniaResultados.btnNext)).isDisplayed())
 //		{
