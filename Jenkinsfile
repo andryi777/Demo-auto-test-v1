@@ -33,7 +33,7 @@ pipeline {
 	
         stage ('Build') {
             steps {
-                bat ("mvn -X clean verify")
+                sh ("mvn -X clean verify")
             }
         }
         
@@ -44,7 +44,7 @@ pipeline {
 	        			try {
 	        				sauce('saucelabs-US') {
 	    						sauceconnect(useGeneratedTunnelIdentifier: true, verboseLogging: true) {
-			        				bat ("mvn test -Dcucumber.features=src/test/resources/features/ -Dcucumber.filter.tags=${ESCENARIO} -Dcucumber.plugin=json:target/site/result.json -Dcucumber.glue=demo")
+			        				sh ("mvn test -Denvironment=run_with_saucelabs -Dcucumber.features=src/test/resources/features/ -Dcucumber.filter.tags=${ESCENARIO} -Dcucumber.plugin=json:target/site/result.json -Dcucumber.glue=demo")
 			        			}
 			        		}
 	        			}
@@ -61,7 +61,7 @@ pipeline {
         	steps {
         		script {
 					try {
-                     	bat "mvn serenity:aggregate"
+                     	sh "mvn serenity:aggregate"
                     	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/target/site/serenity", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])
                     	//publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: "${WORKSPACE}/target/site/serenity${defTimestamp}", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: ''])
                     	//publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: "${WORKSPACE}\\target\\site\\serenity${defTimestamp}", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: ''])
