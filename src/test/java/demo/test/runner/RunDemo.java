@@ -21,11 +21,11 @@ public class RunDemo {
 //		ExcelUtilPropio.getInstancia().escribirFeatures();
 		System.out.println("ss");
 				
-		EnvironmentVariables variables= SystemEnvironmentVariables.createEnvironmentVariables(); 
-
-		String v_user= EnvironmentSpecificConfiguration.from(variables).getProperty("saucelabs.username"); 
-		String v_pass= EnvironmentSpecificConfiguration.from(variables).getProperty("saucelabs.accessKey"); 
-
-		System.out.println(v_user+ " - "+v_pass); 
+//		EnvironmentVariables variables= SystemEnvironmentVariables.createEnvironmentVariables(); 
+//
+//		String v_user= EnvironmentSpecificConfiguration.from(variables).getProperty("saucelabs.username"); 
+//		String v_pass= EnvironmentSpecificConfiguration.from(variables).getProperty("saucelabs.accessKey"); 
+//
+//		System.out.println(v_user+ " - "+v_pass); 
 	}
 }
