@@ -18,6 +18,9 @@ import demo.main.util.Variables;
 import demo.main.xpath.XpathUrbaniaResultados;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.webdriver.RemoteDriver;
+import net.thucydides.core.model.TestOutcome;
+import net.thucydides.core.steps.StepEventBus;
 
 public class AppUrbaniaResultadosPage extends PageObject {
 
@@ -36,13 +39,16 @@ public class AppUrbaniaResultadosPage extends PageObject {
 	public void getPrecios() throws IOException {
 		FileWriter fileRoute = new FileWriter("/Users/christianmaurysolis/Documents/newFile.txt");
 		
-		JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+		JavascriptExecutor jse = (JavascriptExecutor) RemoteDriver.of(getDriver());
 		WebElement elemento;
-		int registros = getDriver().findElements(By.xpath(xpathUrbaniaResultados.lblRefDireccion)).size();
+		int registros = RemoteDriver.of(getDriver()).findElements(By.xpath(xpathUrbaniaResultados.lblRefDireccion)).size();
 		System.out.println(registros);
 		String caracteristicas="";
 		
 		Serenity.takeScreenshot();
+//		TestOutcome outcome = StepEventBus.getEventBus().getBaseStepListener().getCurrentTestOutcome();
+		System.out.println("SauceOnDemandSessionID="+RemoteDriver.of(getDriver()).getSessionId().toString()+ " job-name=TEST");
+		
 //		while(getDriver().findElement(By.xpath(xpathUrbaniaResultados.btnNext)).isDisplayed())
 //		{
 //			try {

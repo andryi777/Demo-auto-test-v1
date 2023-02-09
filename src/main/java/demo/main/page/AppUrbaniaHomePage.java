@@ -6,6 +6,7 @@ import demo.main.util.PageObjectUtil;
 import demo.main.xpath.XpathUrbaniaHome;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.webdriver.RemoteDriver;
 
 public class AppUrbaniaHomePage extends PageObject {
 
@@ -30,13 +31,13 @@ public class AppUrbaniaHomePage extends PageObject {
 	}
 	
 	public void filtrarBusqueda() {
-		pageObjectUtil.seleniumClick(getDriver(), xpathUrbaniaHome.tabComprar, 0);
-		pageObjectUtil.seleniumClick(getDriver(), xpathUrbaniaHome.cboTipoPropiedad, 0);
-		pageObjectUtil.seleniumClick(getDriver(), xpathUrbaniaHome.opcCasa, 0);
-		pageObjectUtil.seleniumClick(getDriver(), xpathUrbaniaHome.txtDatosCasa, 0);
-		pageObjectUtil.seleniumEscribir(getDriver(), xpathUrbaniaHome.txtDatosCasa, 0, "Lima", null);
-		pageObjectUtil.seleniumClick(getDriver(), xpathUrbaniaHome.opcLima, 0);
-		pageObjectUtil.seleniumClick(getDriver(), xpathUrbaniaHome.btnBuscar, 0);
+		pageObjectUtil.seleniumClick(RemoteDriver.of(getDriver()), xpathUrbaniaHome.tabComprar, 0);
+		pageObjectUtil.seleniumClick(RemoteDriver.of(getDriver()), xpathUrbaniaHome.cboTipoPropiedad, 0);
+		pageObjectUtil.seleniumClick(RemoteDriver.of(getDriver()), xpathUrbaniaHome.opcCasa, 0);
+		pageObjectUtil.seleniumClick(RemoteDriver.of(getDriver()), xpathUrbaniaHome.txtDatosCasa, 0);
+		pageObjectUtil.seleniumEscribir(RemoteDriver.of(getDriver()), xpathUrbaniaHome.txtDatosCasa, 0, "Lima", null);
+		pageObjectUtil.seleniumClick(RemoteDriver.of(getDriver()), xpathUrbaniaHome.opcLima, 0);
+		pageObjectUtil.seleniumClick(RemoteDriver.of(getDriver()), xpathUrbaniaHome.btnBuscar, 0);
 		
 		Serenity.takeScreenshot();
 	}
