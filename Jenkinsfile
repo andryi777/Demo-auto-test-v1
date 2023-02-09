@@ -21,7 +21,7 @@ pipeline {
     
     tools {
         maven 'M3'
-        jdk 'jdk17'
+        jdk 'jdk8.221'
     }
     
     options {
